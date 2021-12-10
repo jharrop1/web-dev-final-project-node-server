@@ -5,5 +5,10 @@ const userSchema = mongoose.Schema({
     email: String,
     firstName: String,
     lastName: String,
+    favoriteMovie: String,
+    favoriteGenre: String,
+    savedMovies: [{String}],
+    following: [{String}],
+    userLevel: {type: String, defaultValue: "basic"}
 }, {collection: 'users'});
 module.exports = userSchema;

@@ -18,7 +18,8 @@ const createUser = (user) =>
 const updateUser = (user) =>
     userModel.updateOne({_id: user._id}, {
         $set: user
-    });
+    },
+        );
 
 const deleteUser = (userId) =>
     userModel.deleteOne({_id: userId});
