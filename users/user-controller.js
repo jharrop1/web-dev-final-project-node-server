@@ -9,6 +9,21 @@ module.exports = (app) => {
         userDao.findUserById(req.userId)
             .then(user => res.json(user));
 
+    const findUserByName = (req, res) =>
+        userDao.findByUsername(req.params.userName)
+            .then(user => {
+                if(user) {
+                    const userRes ={
+                        "profile": user,
+                        "found": true
+                    }
+                    res.json(userRes);
+                }
+                else{
+                    res.json({"found": false})
+                }
+            })
+
     const deleteUser = (req, res) =>
         userDao.deleteUser(req.params.userId)
             .then(status => req.send(status));
@@ -58,4 +73,5 @@ module.exports = (app) => {
     app.delete('/api/users/:userId', deleteUser);
     app.get('/api/users', findAllUsers);
     app.get('/api/users/:userId', findUserById);
+    app.get('/api/users/name/:userName', findUserByName);
 };
