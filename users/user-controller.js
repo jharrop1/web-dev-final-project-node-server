@@ -26,11 +26,11 @@ module.exports = (app) => {
 
     const deleteUser = (req, res) =>
         userDao.deleteUser(req.params.userId)
-            .then(status => req.send(status));
+            .then(status => res.send(status));
 
     const updateUser = (req, res) =>
         userDao.updateUser(req.body)
-            .then(status => req.send(status));
+            .then(status => res.send(status));
 
     const login = (req, res) => {
         userDao.findByUsernameAndPassword(req.body)
