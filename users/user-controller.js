@@ -32,6 +32,10 @@ module.exports = (app) => {
         userDao.updateUser(req.body)
             .then(status => res.send(status));
 
+    const updateUser2 = (req, res) =>
+        userDao.updateUser2(req.body)
+            .then(status => req.send(status));
+
     const login = (req, res) => {
         userDao.findByUsernameAndPassword(req.body)
             .then(user => {
@@ -45,18 +49,22 @@ module.exports = (app) => {
     }
 
     const register = (req, res) => {
-        userDao.findByUsername(req.body)
+        JSON.stringify(req.body)
+        userDao.findByUsername2(req.body)
             .then(user => {
                 if(user) {
                     res.sendStatus(404);
                     return;
                 }
+                console.log(user);
                 userDao.createUser(req.body)
                     .then(user => {
                         req.session['profile'] = user; //can store other thingsl ike this, 12/02 lesson 1:03 time  ex req.session['fav-movies'] = ['aliens', 'terminator'];
                         res.json(user)
                     });
-            })
+            }).catch(error => {
+                console.log("error is " + error)
+        })
     }
 
     const profile = (req, res) =>
@@ -70,6 +78,7 @@ module.exports = (app) => {
     app.post('/api/profile', profile);
     app.post('/api/logout', logout);
     app.put('/api/users', updateUser);
+    app.put('/api/users2', updateUser2);
     app.delete('/api/users/:userId', deleteUser);
     app.get('/api/users', findAllUsers);
     app.get('/api/users/:userId', findUserById);

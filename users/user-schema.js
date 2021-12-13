@@ -5,8 +5,8 @@ const userSchema = mongoose.Schema({
     email: String,
     firstName: String,
     lastName: String,
-    favoriteMovie: String,
-    favoriteGenre: String,
+    favoriteMovie: {type: String, defaultValue: "Batman"},
+    favoriteGenre: {type: String, defaultValue: "Action"},
     savedMovies: [{String}],
     following: [{String}],
     userLevel: {type: String, defaultValue: "basic"}

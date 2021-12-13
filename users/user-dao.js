@@ -12,6 +12,9 @@ const findByUsernameAndPassword = ({username, password}) =>
 const findByUsername = (name) =>
     userModel.findOne({username: name});
 
+const findByUsername2 = ({username}) =>
+    userModel.findOne({username});
+
 const createUser = (user) =>
     userModel.create(user);
 
@@ -21,11 +24,17 @@ const updateUser = (user) =>
     },
         );
 
+const updateUser2 = (user) =>
+    userModel.updateOne({_id: user._id}, {
+        $set: user
+    });
+
+
 const deleteUser = (userId) =>
     userModel.deleteOne({_id: userId});
 
 module.exports = {
     findByUsername, findAllUsers, findUserById,
     findByUsernameAndPassword,
-    createUser, updateUser, deleteUser
+    createUser, updateUser, deleteUser, findByUsername2, updateUser2
 };
