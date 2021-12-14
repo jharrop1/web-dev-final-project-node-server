@@ -43,5 +43,5 @@ module.exports = (app) => {
     app.get('/api/Likes', findAllLikes);
     app.get('/api/Likes/:likeId', findLikesById);
     app.get('/api/movies/likes/:imdbId', findLikesByImdbId);
-    app.get('/api/profiles/:profileId', findLikesByProfileId);
+    app.get('/api/likes/:profileId', findLikesByProfileId);
 };
