@@ -28,5 +28,7 @@ const mongoose = require('mongoose');
 mongoose.connect(CONSTANTS.MONGODB_URL);
 
 require('./users/user-controller')(app);
+require('./reviews/review-controller')(app);
+require('./likes/like-controller')(app);
 
 app.listen(process.env.PORT || 4000);
